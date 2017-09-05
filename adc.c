@@ -8,7 +8,7 @@
 
 #define ADC_VOLTAGE_REFERENCE 5.22
 
-#define NUM_ADC_READS 200.0
+#define NUM_ADC_READS 200
 
 /*
  *Funtion that sets uo the ADC with the required congifurations
@@ -32,7 +32,7 @@ void adc_setup(void){
 
 
 /*
- * function that starts the reading and conversion of the ADC readed values
+ * Function that starts the reading and conversion of the ADC readed values
 */
 void adc_start(uint8_t adc_ch){
    //Set the channel to read values from
@@ -45,31 +45,33 @@ void adc_start(uint8_t adc_ch){
    ADCSRA |= (1 << ADSC);
 }
 
-
-float adc_read(float *vswr_val){
+/*
+ * Function that read, convert and store the vswr value
+*/
+void adc_read(float *vswr_val){
    uint8_t forward[NUM_ADC_READS] = {0}, reverse[NUM_ADC_READS] = {0};
-   float forward_avg = 0.0, reverser_avg = 0.0;
+   float forward_avg = 0.0, reverse_avg = 0.0;
 
    // Read NUM_ADC_READS times both ADC0 and ADC1 channels and store them
    for(uint8_t i = 0; i < NUM_ADC_READS; i++){
       //Read forward value
-      adc_read(OA1_OUT);
-      while(ADCSC);
+      adc_start(OA1_OUT);
+      while(ADSC);
       forward[i] = ADC;
 
       //Read reverse value
-      adc_read(OA2_OUT);
-      while(ADCSC);
+      adc_start(OA2_OUT);
+      while(ADSC);
       reverse[i] = ADC;
    }
 
    // Evaluate average value for forward and reverse
    for(uint8_t i = 0; i < NUM_ADC_READS; i++){
       forward_avg += forward[i];
-      reverser_avg += reverse[i];
+      reverse_avg += reverse[i];
    }
    forward_avg /= NUM_ADC_READS;
-   reverser_avg /= NUM_ADC_READS;
+   reverse_avg /= NUM_ADC_READS;
 
    // Convert to voltage value
    forward_avg *= (ADC_VOLTAGE_REFERENCE / 1024);

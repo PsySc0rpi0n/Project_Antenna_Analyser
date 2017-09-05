@@ -9,7 +9,7 @@ LIBS           =
 # You should not have to change anything below here.
 CC             = avr-gcc
 # Override is only needed by avr-lib build system.
-override CFLAGS        = -g -Wall -Wno-comment $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS) -DF_CPU=16000000UL
+override CFLAGS        = -g -Wall -Werror -Wno-comment $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS) -DF_CPU=16000000UL
 override LDFLAGS       = -Wl,-Map,$(PRG).map
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
