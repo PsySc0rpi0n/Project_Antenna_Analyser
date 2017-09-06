@@ -23,7 +23,7 @@ int main(void){
    for( ; ;){
       lcd_gotoxy(5,0);
       lcd_puts("VSWR annalyser");
-      delay_ms(500);
+      _delay_ms(500);
       lcd_gotoxy(0,1);
       lcd_puts("VSWR Value:");
       dtostrf(adc_read(&vswr_val), 5, 2, tmp);
