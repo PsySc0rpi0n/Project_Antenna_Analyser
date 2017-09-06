@@ -10,7 +10,7 @@
 #define BUFFER 64
 
 int main(void){
-   float vswr_val = 0.0;
+   //float vswr_val = 0.0;
    char tmp[BUFFER] = "t";
 
    lcd_init(LCD_DISP_ON);
