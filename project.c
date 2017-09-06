@@ -21,7 +21,7 @@ int main(void){
    freq_send(10e5);
 
    for( ; ;){
-      lcd_gotoxy(5,0);
+      lcd_gotoxy(3,0);
       lcd_puts("VSWR annalyser");
       _delay_ms(500);
       lcd_gotoxy(0,1);
