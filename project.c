@@ -30,6 +30,8 @@ int main(void){
       //itoa(vswr_val, tmp, 10);
       dtostrf(vswr_val, 10, 2, tmp);
       lcd_puts(tmp);
+      _delay_ms(1000);
+      lcd_clrscr();
    }
    return 0;
 }
