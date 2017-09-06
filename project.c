@@ -11,7 +11,7 @@
 
 int main(void){
    float vswr_val = 0.0;
-   char tmp[BUFFER];
+   char tmp[BUFFER] = "t";
 
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
@@ -26,8 +26,8 @@ int main(void){
       _delay_ms(1000);
       lcd_gotoxy(0,1);
       lcd_puts("VSWR Value:");
-      adc_read(&vswr_val);
-      itoa(vswr_val, tmp, 10);
+      //adc_read(&vswr_val);
+      //itoa(vswr_val, tmp, 10);
       // dtostrf(vswr_val, 5, 2, tmp);
       lcd_puts(tmp);
    }
