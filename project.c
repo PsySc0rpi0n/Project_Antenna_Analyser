@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#include <util/delay.h>
 
 #include "signal_gen.h"
 #include "adc.h"
@@ -22,10 +23,10 @@ int main(void){
    for( ; ;){
       lcd_gotoxy(5,0);
       lcd_puts("VSWR annalyser");
+      delay_ms(500);
       lcd_gotoxy(0,1);
       lcd_puts("VSWR Value:");
       dtostrf(adc_read(&vswr_val), 5, 2, tmp);
-      lcd_puts("VSWR annalyser");
       lcd_puts(tmp);
    }
    return 0;
