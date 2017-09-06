@@ -28,7 +28,7 @@ int main(void){
       lcd_puts("VSWR Value:");
       adc_read(&vswr_val);
       //itoa(vswr_val, tmp, 10);
-      dtostrf(vswr_val, 10, 2, tmp);
+      dtostrf(vswr_val, 5, 2, tmp);
       lcd_puts(tmp);
       _delay_ms(1000);
       lcd_clrscr();
