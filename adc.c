@@ -56,12 +56,12 @@ void adc_read(float *vswr_val){
    for(uint8_t i = 0; i < NUM_ADC_READS; i++){
       //Read forward value
       adc_start(OA1_OUT);
-      while(ADSC);
+      while(ADCSRA & (1 << ADSC));
       forward[i] = ADC;
 
       //Read reverse value
       adc_start(OA2_OUT);
-      while(ADSC);
+      while(ADCSRA & (1 << ADSC));
       reverse[i] = ADC;
    }
 
