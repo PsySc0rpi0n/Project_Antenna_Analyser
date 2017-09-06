@@ -26,7 +26,7 @@ int main(void){
       _delay_ms(500);
       lcd_gotoxy(0,1);
       lcd_puts("VSWR Value:");
-      adc_read(&vswr_val)
+      adc_read(&vswr_val);
       dtostrf(vswr_val, 5, 2, tmp);
       lcd_puts(tmp);
    }
