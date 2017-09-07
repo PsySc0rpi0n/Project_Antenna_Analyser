@@ -31,7 +31,6 @@ int main(void){
       dtostrf(vswr_val, 5, 2, tmp);
       lcd_puts(tmp);
       _delay_ms(1000);
-      lcd_clrscr();
    }
    return 0;
 }
