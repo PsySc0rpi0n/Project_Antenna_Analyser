@@ -11,15 +11,16 @@
 
 #define BUFFER 64
 
+const char msg_vswr_value[] PROGMEM = "VSWR Value:";
+const char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
+const PGM_P const messages[] PROGMEM = {
+                              msg_vswr_value,
+                              msg_vswr_analyser
+                           };
+
 int main(void){
    float vswr_val = 0.0;
    char tmp[BUFFER];
-   char msg_vswr_value[] PROGMEM = "VSWR Value:";
-   char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
-   PGM_P messages[] PROGMEM = {
-                                 msg_vswr_value,
-                                 msg_vswr_analyser
-                              };
 
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
