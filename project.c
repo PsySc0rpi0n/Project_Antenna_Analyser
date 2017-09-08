@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <util/delay.h>
 #include <string.h>
+#include <avr/pgmspace.h>
 
 #include "signal_gen.h"
 #include "adc.h"
