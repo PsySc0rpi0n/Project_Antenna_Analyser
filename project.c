@@ -11,6 +11,8 @@
 
 #define BUFFER 64
 
+void read_program_space_string(uint8_t index);
+
 const char msg_vswr_value[] PROGMEM = "VSWR Value:";
 const char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
 const PGM_P const messages[] PROGMEM = {
@@ -30,16 +32,27 @@ int main(void){
    freq_send(10e5);
 
    lcd_gotoxy(3,0);
-   lcd_puts((PGM_P) pgm_read_word(&(messages[1])));
+   //lcd_puts((PGM_P) pgm_read_word(&(messages[1])));
+   read_program_space_string(1);
    _delay_ms(1000);
    lcd_gotoxy(0,1);
-   lcd_puts((PGM_P) pgm_read_word(&(messages[0])));
+   //lcd_puts((PGM_P) pgm_read_word(&(messages[0])));
+   read_program_space_string(0);
    for( ; ;){
       adc_read(&vswr_val);
       dtostrf(vswr_val, 7, 4, tmp);
       lcd_puts(tmp);
       _delay_ms(1000);
-      lcd_gotoxy(strlen((PGM_P) pgm_read_word(&(messages[0]))), 1);
+      lcd_gotoxy(strlen_P((PGM_P) pgm_read_word(&(messages[0]))), 1);
    }
    return 0;
+}
+
+
+/*Function to read strings from Program Space to Data Space*/
+void read_program_space_string(uint8_t index){
+   char buffer_str[BUFFER];
+
+   strcpy_P(buffer_str, (PGM_P) pgm_read_word(&(messages[index])));
+   lcd_puts(buffer_str);
 }
