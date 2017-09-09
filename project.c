@@ -32,11 +32,9 @@ int main(void){
    freq_send(10e5);
 
    lcd_gotoxy(3,0);
-   //lcd_puts((PGM_P) pgm_read_word(&(messages[1])));
    read_program_space_string(1);
    _delay_ms(1000);
    lcd_gotoxy(0,1);
-   //lcd_puts((PGM_P) pgm_read_word(&(messages[0])));
    read_program_space_string(0);
    for( ; ;){
       adc_read(&vswr_val);
