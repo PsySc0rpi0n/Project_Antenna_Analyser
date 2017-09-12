@@ -13,15 +13,17 @@
 
 void read_program_space_string(uint8_t index);
 
-const char msg_vswr_value[] PROGMEM = "VSWR Value:";
+const char msg_vswr_value[] PROGMEM    = "VSWR Value:";
 const char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
+const char msg_vswr_unit[] PROGMEM     = "mV";
 const PGM_P const messages[] PROGMEM = {
                               msg_vswr_value,
-                              msg_vswr_analyser
+                              msg_vswr_analyser,
+                              msg_vswr_unit
                            };
 
 int main(void){
-   float vswr_val = 0.0;
+   uint8_t vswr_val = 0;
    char tmp[BUFFER];
 
    lcd_init(LCD_DISP_ON);
@@ -38,8 +40,9 @@ int main(void){
    read_program_space_string(0);
    for( ; ;){
       adc_read(&vswr_val);
-      dtostrf(vswr_val, 7, 4, tmp);
+      dtostrf(vswr_val, 5, 0, tmp);
       lcd_puts(tmp);
+      read_program_space_string(2);
       _delay_ms(1000);
       lcd_gotoxy(strlen_P((PGM_P) pgm_read_word(&(messages[0]))), 1);
    }
