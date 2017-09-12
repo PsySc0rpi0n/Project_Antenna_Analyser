@@ -48,7 +48,7 @@ void adc_start(uint8_t adc_ch){
 /*
  * Function that read, convert and store the vswr value
 */
-void adc_read(float *vswr_val){
+void adc_read(uint16_t *vswr_val){
    uint8_t forward[NUM_ADC_READS] = {0}, reverse[NUM_ADC_READS] = {0};
    uint8_t forward_avg = 0, reverse_avg = 0;
 
