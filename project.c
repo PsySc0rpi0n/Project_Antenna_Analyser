@@ -23,7 +23,7 @@ const PGM_P const messages[] PROGMEM = {
                            };
 
 int main(void){
-   uint8_t vswr_val = 0;
+   uint16_t vswr_val = 0;
    char tmp[BUFFER];
 
    lcd_init(LCD_DISP_ON);
