@@ -6,7 +6,7 @@
 #define OA1_OUT   PC0 // OpAmp 1 Output read
 #define OA2_OUT   PC1 // OpAmp 2 Output read
 
-#define ADC_VOLTAGE_REFERENCE 5.22
+#define ADC_VOLTAGE_REFERENCE 5220
 
 #define NUM_ADC_READS 200
 
@@ -50,7 +50,7 @@ void adc_start(uint8_t adc_ch){
 */
 void adc_read(float *vswr_val){
    uint8_t forward[NUM_ADC_READS] = {0}, reverse[NUM_ADC_READS] = {0};
-   float forward_avg = 0.0, reverse_avg = 0.0;
+   uint8_t forward_avg = 0, reverse_avg = 0;
 
    // Read NUM_ADC_READS times both ADC0 and ADC1 channels and store them
    for(uint8_t i = 0; i < NUM_ADC_READS; i++){
