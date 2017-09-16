@@ -26,7 +26,6 @@ const PGM_P const messages[]   PROGMEM = {
                                           msg_vswr_freq,
                                           msg_dds_freq
                                        };
-volatile uint8_t freq_sweep_flag = 2;
 
 int main(void){
    float vswr_val = 0;
@@ -68,7 +67,7 @@ int main(void){
    _delay_ms(100);
 
    for( ; ;){
-      if(freq_sweep_flag != 2){
+      if( (EIFR & (1 << INT1)) | (EIFR & (1 << INT0))){
          freq_sweep(&current_freq_value);
          lcd_gotoxy(0, 3);
          lcd_puts("Test!");
