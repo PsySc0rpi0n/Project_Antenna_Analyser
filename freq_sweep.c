@@ -14,7 +14,8 @@ volatile uint8_t freq_sweep_flag;
 
 void interrupt_setup(void){
       // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
-      EICRA |= (1 << ISC11) | (0 << ISC10) | (1 << ISC01) | (0 << ISC00); // for INT1 and INT0
+      EICRA |= (1 << ISC11) | (1 << ISC01); // for INT1 and INT0
+      EICRA &= ~(1 << ISC10) | ~(1 << ISC00);
 
       // Activate INT1 and INT0, ccording to the datasshet, page 72, section 13.2.2
       EIMSK |= (1 << INT1) | (1 << INT0);
