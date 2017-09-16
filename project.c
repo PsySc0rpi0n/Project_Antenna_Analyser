@@ -73,6 +73,7 @@ int main(void){
          lcd_gotoxy(0, 3);
          lcd_puts("Test!");
       }
+      
       _delay_ms(1);
       adc_read(&vswr_val);
       dtostrf(vswr_val, 4, 4, tmp);
