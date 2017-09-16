@@ -62,7 +62,7 @@ int main(void){
    _delay_ms(100);
 
    //Write " Khz" to LCD correct position
-   lcd_gotoxy(11, 2);
+   lcd_gotoxy(17, 2);
    write_to_lcd_from_program_space_string(4);
    _delay_ms(100);
 
