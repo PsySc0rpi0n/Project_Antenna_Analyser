@@ -10,7 +10,7 @@ LIBS           =
 CC             = avr-gcc
 # Override is only needed by avr-lib build system.
 override CFLAGS        = -g -Wall -Werror -Wno-comment $(OPTIMIZE) -mmcu=$(MCU_TARGET) $(DEFS) -DF_CPU=16000000UL
-override LDFLAGS       = -Wl,-Map,$(PRG).map, -Wl,--warn-common
+override LDFLAGS       = -Wl,-Map,$(PRG).map -Wl,--warn-common
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
 all: $(PRG).elf lst text eeprom
