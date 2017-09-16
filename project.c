@@ -81,7 +81,7 @@ int main(void){
 
       _delay_ms(100);
 
-      dtostrf(current_freq_value, 3, 0, tmp);
+      dtostrf(current_freq_value, 5, 0, tmp);
       lcd_gotoxy(9, 2);
       lcd_puts(tmp);
 
