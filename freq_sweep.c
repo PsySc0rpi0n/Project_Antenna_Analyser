@@ -8,8 +8,6 @@
 #define FREQ_MIN     1000
 #define FREQ_STEP  100000
 
-volatile uint8_t sweep_dir;
-
 void interrupt_setup(void){
       // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
       EICRA |= (1 << ISC11) | ~(1 << ISC10) | (1 << ISC01) | ~(1 << ISC00); // for INT1 and INT0

@@ -32,6 +32,7 @@ int main(void){
    char tmp[BUFFER];
    uint64_t inital_freq_value = 10e5,
             current_freq_value  = inital_freq_value;
+   extern volatile uint8_t freq_sweep_flag;
 
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
