@@ -1,5 +1,5 @@
 PRG            = project
-OBJ            = signal_gen.o project.o adc.o lcd.o
+OBJ            = signal_gen.o project.o adc.o lcd.o freq_sweep.o
 
 MCU_TARGET		= atmega328p
 
@@ -17,10 +17,11 @@ all: $(PRG).elf lst text eeprom
 $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 # dependency:
-signal_gen.o: signal_gen.c signal_gen.h
-adc.o       : adc.c adc.h
-project.o   : project.c
-lcd.o       : lcd.c lcd.h
+signal_gen.o : signal_gen.c signal_gen.h
+adc.o        : adc.c adc.h
+project.o    : project.c
+lcd.o        : lcd.c lcd.h
+freq_sweep.o : freq_sweep.c freq_sweep.h
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)

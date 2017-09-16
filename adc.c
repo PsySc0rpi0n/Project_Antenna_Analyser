@@ -78,7 +78,8 @@ void adc_read(float *vswr_val){
    reverse_avg *= (ADC_VOLTAGE_REFERENCE / 1024);
 
    //Evaluate VSWR value
-   if( (*vswr_val = forward_avg - reverse_avg) < 0 )
-      *vswr_val = 0;
-
+   if(reverse_avg >= forward_avg) //To prevent dividing by zero or get negative VSWR
+      *vswr_val = 9999;
+   else
+      *vswr_val = (forward_avg + reverse_avg) / (forward_avg - reverse_avg);
 }
