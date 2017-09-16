@@ -26,7 +26,7 @@ const PGM_P const messages[]   PROGMEM = {
                                           msg_vswr_freq,
                                           msg_dds_freq
                                        };
-volatile uint8_t freq_sweep_flag;
+volatile uint8_t freq_sweep_flag = 2;
 
 int main(void){
    float vswr_val = 0;
@@ -55,25 +55,27 @@ int main(void){
    //Write " Volt" to LCD correct position
    lcd_gotoxy(12, 1);
    write_to_lcd_from_program_space_string(2);
-   _delay_ms(500);
+   _delay_ms(50);
 
    //Write "DDS Frew" to LCD correct position
    lcd_gotoxy(0, 2);
    write_to_lcd_from_program_space_string(3);
-   _delay_ms(500);
+   _delay_ms(50);
 
    //Write " Khz" to LCD correct position
    lcd_gotoxy(11, 2);
    write_to_lcd_from_program_space_string(4);
-   _delay_ms(500);
+   _delay_ms(50);
 
    for( ; ;){
-      if(freq_sweep_flag != 2)
+      if(freq_sweep_flag != 2){
          freq_sweep(&current_freq_value);
-
+         lcd_gotoxy(0, 3);
+         lcd_puts("Test!");
+      }
       _delay_ms(1);
       adc_read(&vswr_val);
-      dtostrf(vswr_val, 7, 4, tmp);
+      dtostrf(vswr_val, 4, 4, tmp);
       lcd_gotoxy(5, 1);
       lcd_puts(tmp);
 
