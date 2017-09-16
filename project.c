@@ -25,14 +25,13 @@ const PGM_P const messages[]   PROGMEM = {
                                           msg_vswr_unit,
                                           msg_vswr_freq
                                        };
-
+volatile uint8_t freq_sweep_flag;
 
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
    uint64_t inital_freq_value = 10e5,
             current_freq_value  = inital_freq_value;
-   extern volatile uint8_t freq_sweep_flag;
 
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();

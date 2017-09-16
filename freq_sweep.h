@@ -3,7 +3,6 @@
 
 extern volatile uint8_t sweep_dir;
 extern volatile uint8_t freq_sweep_flag;
-extern volatile uint8_t sweep_dir;
 
 void interrupt_setup(void);
 void freq_sweep(uint64_t* current_freq_value);
