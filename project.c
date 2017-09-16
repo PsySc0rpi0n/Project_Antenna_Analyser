@@ -75,14 +75,14 @@ int main(void){
 
       _delay_ms(1);
       adc_read(&vswr_val);
-      dtostrf(vswr_val, 4, 4, tmp);
+      dtostrf(vswr_val, 2, 2, tmp);
       lcd_gotoxy(5, 1);
       lcd_puts(tmp);
 
       _delay_ms(100);
 
       dtostrf(current_freq_value, 3, 0, tmp);
-      lcd_gotoxy(4, 2);
+      lcd_gotoxy(9, 2);
       lcd_puts(tmp);
 
       _delay_ms(100);
