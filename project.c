@@ -85,7 +85,10 @@ int main(void){
       lcd_gotoxy(9, 2);
       lcd_puts(tmp);
 
-      _delay_ms(100);
+      lcd_gotoxy(0, 3);
+      lcd_puts("Test");
+      dtostrf(sweep_dir, 1, 0, tmp);
+      _delay_ms(2000);
    }
    return 0;
 }

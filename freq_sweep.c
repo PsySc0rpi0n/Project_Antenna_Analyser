@@ -42,7 +42,7 @@ void freq_sweep(uint64_t* current_freq_val){
 
    *current_freq_val = updated_freq_val;
    freq_send(updated_freq_val);
-   sweep_dir = 2;
+   //sweep_dir = 2;
 }
 
 
