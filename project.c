@@ -23,7 +23,8 @@ const PGM_P const messages[]   PROGMEM = {
                                           msg_vswr_value,
                                           msg_vswr_analyser,
                                           msg_vswr_unit,
-                                          msg_vswr_freq
+                                          msg_vswr_freq,
+                                          msg_dds_freq
                                        };
 volatile uint8_t freq_sweep_flag;
 
@@ -37,32 +38,37 @@ int main(void){
    lcd_clrscr();
    adc_setup();
    ad9850_setup();
+   interrupt_setup();
 
    freq_send(inital_freq_value);
 
    //Write "VSWR annalyser" to LCD correct position
    lcd_gotoxy(3, 0);
    write_to_lcd_from_program_space_string(1);
-   _delay_ms(1000);
+   _delay_ms(500);
 
    //Write "VSWR:" to LCD correct position
    lcd_gotoxy(0, 1);
    write_to_lcd_from_program_space_string(0);
+   _delay_ms(500);
 
    //Write " Volt" to LCD correct position
    lcd_gotoxy(12, 1);
    write_to_lcd_from_program_space_string(2);
+   _delay_ms(500);
 
    //Write "DDS Frew" to LCD correct position
    lcd_gotoxy(0, 2);
    write_to_lcd_from_program_space_string(3);
+   _delay_ms(500);
 
    //Write " Khz" to LCD correct position
    lcd_gotoxy(11, 2);
    write_to_lcd_from_program_space_string(4);
+   _delay_ms(500);
 
    for( ; ;){
-      if(freq_sweep_flag)
+      if(freq_sweep_flag != 2)
          freq_sweep(&current_freq_value);
 
       _delay_ms(1);
@@ -76,6 +82,8 @@ int main(void){
       dtostrf(current_freq_value, 6, 0, tmp);
       lcd_gotoxy(4, 2);
       lcd_puts(tmp);
+
+      _delay_ms(100);
    }
    return 0;
 }

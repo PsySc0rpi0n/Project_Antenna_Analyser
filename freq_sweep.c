@@ -3,6 +3,7 @@
 
 #include "signal_gen.h"
 #include "freq_sweep.h"
+#include "lcd.h"
 
 #define FREQ_MAX 39000000
 #define FREQ_MIN     1000
@@ -28,7 +29,6 @@ void interrupt_setup(void){
  */
 void freq_sweep(uint64_t* current_freq_val){
    uint64_t updated_freq_val = 0;
-
    if(sweep_dir){
       if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
          updated_freq_val = FREQ_MIN;
