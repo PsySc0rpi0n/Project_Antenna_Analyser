@@ -67,7 +67,7 @@ int main(void){
    _delay_ms(100);
 
    for( ; ;){
-      if( (EIFR & (1 << INT1)) | (EIFR & (1 << INT0))){
+      if( (EIFR & (1 << INT1)) || (EIFR & (1 << INT0))){
          freq_sweep(&current_freq_value);
          lcd_gotoxy(0, 3);
          lcd_puts("Test!");
