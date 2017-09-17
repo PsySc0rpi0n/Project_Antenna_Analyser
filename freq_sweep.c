@@ -9,7 +9,7 @@
 #define FREQ_MIN     1000
 #define FREQ_STEP  100000
 
-volatile uint8_t sweep_dir = 2;
+volatile uint8_t sweep_dir = SWEEP_DIR_UNDEF;
 volatile uint8_t sweep_sta = SWEEP_STA_UNDEF;
 
 void interrupt_setup(void){
@@ -29,7 +29,7 @@ void interrupt_setup(void){
  */
 void freq_sweep(uint64_t* current_freq_val){
    uint64_t updated_freq_val = 0;
-   if(sweep_dir){
+   if(sweep_dir == SWEEP_DIR_UP){
       if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
          updated_freq_val = FREQ_MIN;
       else
@@ -43,7 +43,8 @@ void freq_sweep(uint64_t* current_freq_val){
 
    *current_freq_val = updated_freq_val;
    freq_send(updated_freq_val);
-   //sweep_dir = 2;
+   sweep_sta = SWEEP_STA_OFF;
+   sweep_dir = SWEEP_DIR_UNDEF;
 }
 
 
@@ -52,10 +53,10 @@ void freq_sweep(uint64_t* current_freq_val){
  */
 ISR(INT0_vect){
    sweep_sta = SWEEP_STA_ON;
-   sweep_dir = 0;
+   sweep_dir = SWEEP_DIR_DOWN;
 }
 
 ISR(INT1_vect){
    sweep_sta = SWEEP_STA_ON;
-   sweep_dir = 1;
+   sweep_dir = SWEEP_DIR_UP;
 }

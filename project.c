@@ -71,8 +71,6 @@ int main(void){
          freq_sweep(&current_freq_value);
          lcd_gotoxy(0, 3); // For debug
          lcd_puts("Test!");// For debug
-         sweep_sta = SWEEP_STA_OFF;
-         sweep_dir = 2;
          lcd_gotoxy(6, 3);
          dtostrf(sweep_dir, 1, 0, tmp);
          lcd_puts(tmp);
