@@ -33,18 +33,18 @@ void freq_sweep(uint64_t* current_freq_val){
       if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
          updated_freq_val = FREQ_MIN;
       else
-         updated_freq_val += FREQ_STEP;
+         updated_freq_val = *current_freq_val + FREQ_STEP;
    }else{
       if( (*current_freq_val - FREQ_STEP) < FREQ_MIN)
          updated_freq_val = FREQ_MAX;
       else
-         updated_freq_val -= FREQ_STEP;
+         updated_freq_val = *current_freq_val - FREQ_STEP;
    }
 
    *current_freq_val = updated_freq_val;
    freq_send(updated_freq_val);
    sweep_sta = SWEEP_STA_OFF;
-   sweep_dir = SWEEP_DIR_UNDEF;
+   //sweep_dir = SWEEP_DIR_UNDEF;
 }
 
 
