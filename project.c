@@ -75,6 +75,7 @@ int main(void){
          dtostrf(sweep_dir, 1, 0, tmp);
          lcd_puts(tmp);
          _delay_ms(2000);
+         sweep_dir = SWEEP_DIR_UNDEF;
       }
 
       _delay_ms(1);
