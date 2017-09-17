@@ -67,10 +67,16 @@ int main(void){
    _delay_ms(100);
 
    for( ; ;){
-      if( (EIFR & (1 << INT1)) || (EIFR & (1 << INT0))){
+      if(sweep_sta != SWEEP_STA_UNDEF){
          freq_sweep(&current_freq_value);
-         lcd_gotoxy(0, 3);
-         lcd_puts("Test!");
+         lcd_gotoxy(0, 3); // For debug
+         lcd_puts("Test!");// For debug
+         sweep_sta = SWEEP_STA_OFF;
+         sweep_dir = 2;
+         lcd_gotoxy(6, 3);
+         dtostrf(sweep_dir, 1, 0, tmp);
+         lcd_puts(tmp);
+         _delay_ms(2000);
       }
 
       _delay_ms(1);
@@ -84,11 +90,6 @@ int main(void){
       dtostrf(current_freq_value, 5, 0, tmp);
       lcd_gotoxy(9, 2);
       lcd_puts(tmp);
-
-      lcd_gotoxy(0, 3);
-      lcd_puts("Test");
-      dtostrf(sweep_dir, 1, 0, tmp);
-      _delay_ms(2000);
    }
    return 0;
 }

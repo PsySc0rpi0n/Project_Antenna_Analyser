@@ -10,6 +10,7 @@
 #define FREQ_STEP  100000
 
 volatile uint8_t sweep_dir = 2;
+volatile uint8_t sweep_sta = SWEEP_STA_UNDEF;
 
 void interrupt_setup(void){
       // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
@@ -50,9 +51,11 @@ void freq_sweep(uint64_t* current_freq_val){
  * ISR routines
  */
 ISR(INT0_vect){
+   sweep_sta = SWEEP_STA_ON;
    sweep_dir = 0;
 }
 
 ISR(INT1_vect){
+   sweep_sta = SWEEP_STA_ON;
    sweep_dir = 1;
 }
