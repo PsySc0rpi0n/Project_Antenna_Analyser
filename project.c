@@ -30,7 +30,7 @@ const PGM_P const messages[]   PROGMEM = {
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t inital_freq_value = 10e5,
+   uint64_t inital_freq_value = 1e5,
             current_freq_value  = inital_freq_value;
 
    DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input
@@ -92,7 +92,7 @@ int main(void){
 
       _delay_ms(100);
 
-      dtostrf(current_freq_value, 5, 0, tmp);
+      dtostrf(current_freq_value, 3, 0, tmp);
       lcd_gotoxy(9, 2);
       lcd_puts(tmp);
    }
