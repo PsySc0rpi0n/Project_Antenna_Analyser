@@ -3,9 +3,6 @@
 
 #include "adc.h"
 
-#define OA1_OUT   PC0 // OpAmp 1 Output read
-#define OA2_OUT   PC1 // OpAmp 2 Output read
-
 #define ADC_VOLTAGE_REFERENCE 5.22
 
 #define NUM_ADC_READS 200
@@ -55,12 +52,12 @@ void adc_read(float *vswr_val){
    // Read NUM_ADC_READS times both ADC0 and ADC1 channels and store them
    for(uint8_t i = 0; i < NUM_ADC_READS; i++){
       //Read forward value
-      adc_start(OA1_OUT);
+      adc_start(OAF_OUT);
       while(ADCSRA & (1 << ADSC));
       forward[i] = ADC;
 
       //Read reverse value
-      adc_start(OA2_OUT);
+      adc_start(OAR_OUT);
       while(ADCSRA & (1 << ADSC));
       reverse[i] = ADC;
    }

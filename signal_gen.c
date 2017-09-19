@@ -3,22 +3,22 @@
 
 #include "signal_gen.h"
 
-#define RST_PIN   PC3 // Reset pin      -- AD9850 <----> AtMega328
-#define DATA_PIN  PC2 // Data pin       -- AD9850 <----> AtMega328
-#define FQ_UD_PIN PD4 // Freq_up pin    -- AD9850 <----> AtMega328
-#define W_CLK_PIN PD5 // Word Clock pin -- AD9850 <----> AtMega328
+#define RST_PIN   PC5 // Reset pin      -- AD9850 <----> AtMega328
+#define DATA_PIN  PC4 // Data pin       -- AD9850 <----> AtMega328
+#define FQ_UD_PIN PC3 // Freq_up pin    -- AD9850 <----> AtMega328
+#define W_CLK_PIN PC2 // Word Clock pin -- AD9850 <----> AtMega328
 
 void pulse_high(uint8_t pin){
-   PORTD |= _BV(pin);
-   PORTD &= ~_BV(pin);
+   PORTC |= _BV(pin);
+   PORTC &= ~_BV(pin);
 }
 
 void send_byte(uint8_t byte){
    for(uint8_t i = 0; i < 8; i++, byte >>= 1){
       if( !(byte & 0x01) )
-         PORTD &= ~_BV(DATA_PIN);
+         PORTC &= ~_BV(DATA_PIN);
       else
-         PORTD |= _BV(DATA_PIN);
+         PORTC |= _BV(DATA_PIN);
       pulse_high(W_CLK_PIN);
    }
 }

@@ -33,6 +33,12 @@ int main(void){
    uint64_t inital_freq_value = 10e5,
             current_freq_value  = inital_freq_value;
 
+   DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input
+   DDRC &= ~(1 << OAR_OUT); // Set ADC1 as input
+   
+   // Set AD9850 pins as output
+   DDRC |= (1 << PC5) | (1 << PC4) | (1 << PC3) | (1 << PC2);
+
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
    adc_setup();
@@ -68,13 +74,13 @@ int main(void){
 
    for( ; ;){
       if(sweep_sta != SWEEP_STA_UNDEF){
-         freq_sweep(&current_freq_value);
-         lcd_gotoxy(0, 3); // For debug
-         lcd_puts("Test!");// For debug
-         lcd_gotoxy(6, 3);
-         dtostrf(sweep_dir, 1, 0, tmp);
-         lcd_puts(tmp);
-         _delay_ms(2000);
+         freq_sweep(current_freq_value);
+         lcd_gotoxy(0, 3);              // For debug
+         lcd_puts("Sweep_dir:");        // For debug
+         lcd_gotoxy(10, 3);             // For debug
+         dtostrf(sweep_dir, 1, 0, tmp); // For debug
+         lcd_puts(tmp);                 // For debug
+         _delay_ms(1000);
          sweep_dir = SWEEP_DIR_UNDEF;
       }
 
