@@ -35,7 +35,7 @@ int main(void){
 
    DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input
    DDRC &= ~(1 << OAR_OUT); // Set ADC1 as input
-   
+
    // Set AD9850 pins as output
    DDRC |= (1 << PC5) | (1 << PC4) | (1 << PC3) | (1 << PC2);
 
@@ -74,7 +74,7 @@ int main(void){
 
    for( ; ;){
       if(sweep_sta != SWEEP_STA_UNDEF){
-         freq_sweep(current_freq_value);
+         freq_sweep(&current_freq_value);
          lcd_gotoxy(0, 3);              // For debug
          lcd_puts("Sweep_dir:");        // For debug
          lcd_gotoxy(10, 3);             // For debug

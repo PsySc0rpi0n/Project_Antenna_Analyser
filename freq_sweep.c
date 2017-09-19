@@ -4,9 +4,9 @@
 #include "signal_gen.h"
 #include "freq_sweep.h"
 
-#define FREQ_MAX 39000000
+#define FREQ_MAX   100000
 #define FREQ_MIN     1000
-#define FREQ_STEP  100000
+#define FREQ_STEP    1000
 
 volatile uint8_t sweep_dir = SWEEP_DIR_UNDEF;
 volatile uint8_t sweep_sta = SWEEP_STA_UNDEF;
@@ -19,28 +19,27 @@ void interrupt_setup(void){
       EIMSK |= (1 << INT1) | (1 << INT0);
 
       // Activate global interrupt flag
-      //SREG |= (1 << SREGI);
       sei();
 }
 
 /*
- *Function that sweeps frequency by external interrupt source
+ *Function that sweeps frequency whan INT0 or INT1 are triggered
  */
-void freq_sweep(uint64_t current_freq_val){
-   uint64_t updated_freq_val = current_freq_val;
+void freq_sweep(uint64_t* current_freq_val){
+
    if(sweep_dir == SWEEP_DIR_UP){
-      if( (updated_freq_val + FREQ_STEP) > FREQ_MAX)
-         updated_freq_val = FREQ_MIN;
+      if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
+         *current_freq_val = FREQ_MIN;
       else
-         updated_freq_val += FREQ_STEP;
+         *current_freq_val += FREQ_STEP;
    }else{
-      if( (updated_freq_val - FREQ_STEP) < FREQ_MIN)
-         updated_freq_val = FREQ_MAX;
+      if( (*current_freq_val - FREQ_STEP) < FREQ_MIN)
+         *current_freq_val = FREQ_MAX;
       else
-         updated_freq_val -= FREQ_STEP;
+         *current_freq_val -= FREQ_STEP;
    }
 
-   freq_send(updated_freq_val);
+   freq_send(*current_freq_val);
    sweep_sta = SWEEP_STA_OFF;
    //sweep_dir = SWEEP_DIR_UNDEF;
 }

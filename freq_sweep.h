@@ -10,4 +10,4 @@ extern volatile uint8_t sweep_dir;
 extern volatile uint8_t sweep_sta;
 
 void interrupt_setup(void);
-void freq_sweep(uint64_t current_freq_value);
+void freq_sweep(uint64_t* current_freq_value);
