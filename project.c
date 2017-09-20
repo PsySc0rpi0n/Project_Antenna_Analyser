@@ -31,7 +31,7 @@ int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
    uint64_t inital_freq_value = 1e5,
-            current_freq_value  = inital_freq_value;
+            *current_freq_value  = inital_freq_value;
 
    DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input
    DDRC &= ~(1 << OAR_OUT); // Set ADC1 as input
