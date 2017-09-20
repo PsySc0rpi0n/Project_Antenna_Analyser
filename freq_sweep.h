@@ -6,7 +6,6 @@
 #define SWEEP_DIR_DOWN  0
 #define SWEEP_DIR_UNDEF 2
 
-extern volatile uint8_t sweep_dir;
 extern volatile uint8_t sweep_sta;
 
 void interrupt_setup(void);
