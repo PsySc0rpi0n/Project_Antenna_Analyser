@@ -31,7 +31,7 @@ void freq_sweep(uint64_t* current_freq_val){
          *current_freq_val = FREQ_MIN;
       else
          *current_freq_val += FREQ_STEP;
-   }else{
+   }else if(sweep_sta == SWEEP_STA_DOWN){
       if( (*current_freq_val - FREQ_STEP) < FREQ_MIN)
          *current_freq_val = FREQ_MAX;
       else
