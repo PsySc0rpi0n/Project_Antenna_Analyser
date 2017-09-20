@@ -73,7 +73,7 @@ int main(void){
    _delay_ms(100);
 
    for( ; ;){
-      if(sweep_sta != SWEEP_STA_UNDEF){
+      if(sweep_sta != SWEEP_STA_OFF){
          freq_sweep(&current_freq_value);
          lcd_gotoxy(0, 3);              // For debug
          lcd_puts("Sweep_dir:");        // For debug
@@ -81,7 +81,6 @@ int main(void){
          dtostrf(sweep_dir, 1, 0, tmp); // For debug
          lcd_puts(tmp);                 // For debug
          _delay_ms(1000);
-         sweep_dir = SWEEP_DIR_UNDEF;
       }
 
       _delay_ms(1);
