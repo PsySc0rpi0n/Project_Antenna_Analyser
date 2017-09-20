@@ -8,8 +8,7 @@
 #define FREQ_MIN     1000
 #define FREQ_STEP    1000
 
-volatile uint8_t sweep_dir = SWEEP_DIR_UNDEF;
-volatile uint8_t sweep_sta = SWEEP_STA_UNDEF;
+volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 
 void interrupt_setup(void){
       // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
@@ -27,7 +26,7 @@ void interrupt_setup(void){
  */
 void freq_sweep(uint64_t* current_freq_val){
 
-   if(sweep_dir == SWEEP_DIR_UP){
+   if(sweep_sta == SWEEP_STA_UP){
       if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
          *current_freq_val = FREQ_MIN;
       else
@@ -41,7 +40,6 @@ void freq_sweep(uint64_t* current_freq_val){
 
    freq_send(*current_freq_val);
    sweep_sta = SWEEP_STA_OFF;
-   //sweep_dir = SWEEP_DIR_UNDEF;
 }
 
 
@@ -49,11 +47,9 @@ void freq_sweep(uint64_t* current_freq_val){
  * ISR routines
  */
 ISR(INT0_vect){
-   sweep_sta = SWEEP_STA_ON;
-   sweep_dir = SWEEP_DIR_DOWN;
+   sweep_sta = SWEEP_STA_UP;
 }
 
 ISR(INT1_vect){
-   sweep_sta = SWEEP_STA_ON;
-   sweep_dir = SWEEP_DIR_UP;
+   sweep_sta = SWEEP_STA_DOWN;
 }
