@@ -4,9 +4,9 @@
 #include "signal_gen.h"
 #include "freq_sweep.h"
 
-#define FREQ_MAX   100000
-#define FREQ_MIN     1000
-#define FREQ_STEP    1000
+#define FREQ_MAX     39e6
+#define FREQ_MIN    100e3
+#define FREQ_STEP   100e3
 
 volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 
