@@ -33,7 +33,7 @@ void adc_setup(void){
 */
 void adc_start(uint8_t adc_ch){
    //Set the channel to read values from
-   ADMUX |= (1 << adc_ch);
+   ADMUX = (ADMUX & 0xf0) | (adc_ch & 0x0f);
 
    // Enable ADC to start reading values
    ADCSRA |= (1 << ADEN);

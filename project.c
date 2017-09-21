@@ -10,7 +10,7 @@
 #include "adc.h"
 #include "lcd.h"
 
-#define BUFFER         64
+#define BUFFER 64
 
 void write_to_lcd_from_program_space_string(uint8_t index);
 void print_updated_freq_and_units(uint8_t ret, uint64_t *freq);

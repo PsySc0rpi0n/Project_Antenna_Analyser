@@ -1,5 +1,6 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <util/delay.h>
 
 #include "signal_gen.h"
 #include "freq_sweep.h"
@@ -48,8 +49,10 @@ void freq_sweep(uint64_t* current_freq_val){
  */
 ISR(INT0_vect){
    sweep_sta = SWEEP_STA_UP;
+   _delay_ms(100); // Button debouncing
 }
 
 ISR(INT1_vect){
    sweep_sta = SWEEP_STA_DOWN;
+   _delay_ms(100); // Button debouncing
 }
