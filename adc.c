@@ -11,6 +11,8 @@
  *Funtion that sets uo the ADC with the required congifurations
 */
 void adc_setup(void){
+   DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input just in case
+   DDRC &= ~(1 << OAR_OUT); // Set ADC1 as input just in case
 
    // Define the prescaler to 128 so that the ADC input frequency is set to 125Khz, a value \
       between 50Khz and 200Khz according to the datasshet, 24.4, page 240

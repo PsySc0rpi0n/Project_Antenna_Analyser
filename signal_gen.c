@@ -33,6 +33,9 @@ void freq_send(uint64_t frequency){
 }
 
 void ad9850_setup(void){
+   // Set AD9850 pins as output
+   DDRC |= (1 << PC5) | (1 << PC4) | (1 << PC3) | (1 << PC2);
+   
    pulse_high(RST_PIN);
    pulse_high(W_CLK_PIN);
    pulse_high(FQ_UD_PIN);

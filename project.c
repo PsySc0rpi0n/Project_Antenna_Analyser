@@ -40,12 +40,6 @@ int main(void){
    uint64_t initial_freq_value = 100e3,
             *current_freq_value  = &initial_freq_value;
 
-   DDRC &= ~(1 << OAF_OUT); // Set ADC0 as input
-   DDRC &= ~(1 << OAR_OUT); // Set ADC1 as input
-
-   // Set AD9850 pins as output
-   DDRC |= (1 << PC5) | (1 << PC4) | (1 << PC3) | (1 << PC2);
-
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
    adc_setup();
