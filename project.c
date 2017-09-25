@@ -37,7 +37,7 @@ const PGM_P const messages[]   PROGMEM = {
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t initial_freq_value = 100e3,
+   uint64_t initial_freq_value = 1e5,
             *current_freq_value  = &initial_freq_value;
 
    lcd_init(LCD_DISP_ON);
@@ -74,7 +74,7 @@ int main(void){
          freq_sweep(current_freq_value);
       }
 
-      _delay_ms(10);
+      _delay_ms(1000);
 
       adc_read(&vswr_val);
       dtostrf(vswr_val, 5, 2, tmp);

@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <inttypes.h>
 
-#include "signal_gen.h"
+#include <util/delay.h>
 
 #define RST_PIN   PC5 // Reset pin      -- AD9850 <----> AtMega328
 #define DATA_PIN  PC4 // Data pin       -- AD9850 <----> AtMega328
@@ -39,4 +39,21 @@ void ad9850_setup(void){
    pulse_high(RST_PIN);
    pulse_high(W_CLK_PIN);
    pulse_high(FU_UD_PIN);
+}
+
+int main(void){
+
+   ad9850_setup();
+
+   for( ; ; ){
+      freq_send(2e6);
+      _delay_ms(3000);
+      freq_send(5e6);
+      _delay_ms(3000);
+      freq_send(10e6);
+      _delay_ms(3000);
+      freq_send(39e6);
+      _delay_ms(3000);
+   }
+   return 0;
 }
