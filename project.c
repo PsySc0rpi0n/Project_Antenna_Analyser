@@ -37,7 +37,7 @@ const PGM_P const messages[]   PROGMEM = {
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t initial_freq_value = 1e5,
+   uint64_t initial_freq_value = 10e6,
             *current_freq_value  = &initial_freq_value;
 
    lcd_init(LCD_DISP_ON);
@@ -97,7 +97,7 @@ void write_to_lcd_from_program_space_string(uint8_t index){
 
 uint8_t freq_step_down(uint64_t freq_value){
 
-   if(freq_value >= 1e5 && freq_value <= 9e5)
+   if(freq_value >= 1 && freq_value <= 9e5)
       return 0; // freq / 1e3 - Khz
    if(freq_value > 9e5 && freq_value <= 39e6)
       return 1; // freq / 1e6 - Mhz

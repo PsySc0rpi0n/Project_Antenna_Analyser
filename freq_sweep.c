@@ -13,13 +13,13 @@ volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 
 void interrupt_setup(void){
       // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
-      EICRA |= (1 << ISC11) | (1 << ISC01); // for INT1 and INT0
+      //EICRA |= (1 << ISC11) | (1 << ISC01); // for INT1 and INT0
 
       // Activate INT1 and INT0, ccording to the datasshet, page 72, section 13.2.2
-      EIMSK |= (1 << INT1) | (1 << INT0);
+      //EIMSK |= (1 << INT1) | (1 << INT0);
 
       // Activate global interrupt flag
-      sei();
+      //sei();
 }
 
 /*
