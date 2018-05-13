@@ -37,7 +37,7 @@ const PGM_P const messages[]   PROGMEM = {
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t initial_freq_value = 10e6,
+   uint64_t initial_freq_value = 20e6,
             *current_freq_value  = &initial_freq_value;
 
    lcd_init(LCD_DISP_ON);
@@ -63,7 +63,7 @@ int main(void){
    write_to_lcd_from_program_space_string(2);
    _delay_ms(100);
 
-   //Write "DDS Frew" to LCD correct position
+   //Write "DDS Freq" to LCD correct position
    lcd_gotoxy(0, 2);
    write_to_lcd_from_program_space_string(3);
    _delay_ms(100);
