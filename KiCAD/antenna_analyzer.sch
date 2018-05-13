@@ -84,17 +84,17 @@ $EndComp
 Wire Wire Line
 	6100 3150 6100 3050
 Wire Wire Line
-	5100 2900 5100 2850
+	5100 2750 5100 2900
 Wire Wire Line
-	5950 2850 5800 2850
+	5550 2850 5950 2850
 Wire Wire Line
 	5800 2850 5800 2750
 Wire Wire Line
-	5800 2550 5800 2400
+	5800 2400 5800 2550
 Wire Wire Line
 	5100 2400 5100 2550
 Wire Wire Line
-	5100 2400 4800 2400
+	4300 2400 5800 2400
 Text Notes 7150 3100 0    60   ~ 0
 TODO:\n- Check connector pin numbering\n- Consider discrete amp to boost the\n  DDS out and cut down harmonics\n- Consider third detector to calculate X\n- Footprint for zero bias Schottky\n- Verify opamp power rail\n- Only use one V+ on DDS module\n- Does this need a crystal?\n- Add LEDs\n- Check UART BT pinout\n- Encoder / other input method\n- Connect LCD_BACKLIGHT
 $Comp
@@ -152,23 +152,15 @@ F 3 "" H 6240 3725 60  0000 C CNN
 	1    6250 3750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5100 2400 5800 2400
 Connection ~ 5100 2400
-Wire Wire Line
-	5550 2850 5800 2850
 Connection ~ 5800 2850
 Wire Wire Line
 	5100 3600 4750 3600
 Wire Wire Line
-	4750 2850 5100 2850
+	4750 2850 5350 2850
 Connection ~ 5100 2850
 Wire Wire Line
-	5100 2850 5100 2750
-Wire Wire Line
-	5400 3600 5550 3600
-Wire Wire Line
-	5550 3600 5850 3600
+	5400 3600 5850 3600
 $Comp
 L power:GND #PWR7
 U 1 1 5AF6D5CE
@@ -251,11 +243,9 @@ F 3 "" H 6240 4925 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5100 4800 4750 4800
+	4750 4800 5100 4800
 Wire Wire Line
-	5400 4800 5550 4800
-Wire Wire Line
-	5550 4800 5850 4800
+	5400 4800 5850 4800
 $Comp
 L power:GND #PWR8
 U 1 1 5AF6D9FA
@@ -314,25 +304,21 @@ F 6 "Microchip MCP6002-I/P" H 7900 3200 50  0001 C CNN "BOM"
 	1    0    0    1   
 $EndComp
 Wire Wire Line
-	6050 3600 6250 3600
+	6050 3600 7600 3600
 Wire Wire Line
-	6250 3650 6250 3600
+	6250 3600 6250 3650
 Connection ~ 6250 3600
 Wire Wire Line
-	6250 3600 6650 3600
+	6650 3600 6650 3650
 Wire Wire Line
-	6650 3650 6650 3600
+	6050 4800 7600 4800
 Wire Wire Line
-	6050 4800 6250 4800
+	6650 4800 6650 4850
 Wire Wire Line
-	6650 4850 6650 4800
-Wire Wire Line
-	6250 4850 6250 4800
+	6250 4800 6250 4850
 Connection ~ 6250 4800
 Wire Wire Line
-	6250 4800 6650 4800
-Wire Wire Line
-	4750 3600 4750 4800
+	4750 2850 4750 4800
 $Comp
 L _passive:R R8
 U 1 1 5AF7459E
@@ -382,9 +368,9 @@ $EndComp
 Wire Wire Line
 	7600 5450 7600 5400
 Wire Wire Line
-	7600 3800 7600 3950
+	7600 3800 7600 4000
 Wire Wire Line
-	7600 5000 7600 5150
+	7600 5000 7600 5200
 $Comp
 L _passive:R R10
 U 1 1 5AF75CB0
@@ -408,15 +394,11 @@ F 3 "" H 8100 5200 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	8000 3950 7600 3950
+	7600 3950 8000 3950
 Connection ~ 7600 3950
 Wire Wire Line
-	7600 3950 7600 4000
-Wire Wire Line
-	8000 5150 7600 5150
+	7600 5150 8000 5150
 Connection ~ 7600 5150
-Wire Wire Line
-	7600 5150 7600 5200
 Connection ~ 5550 4800
 Wire Wire Line
 	5550 4850 5550 4800
@@ -506,11 +488,9 @@ $EndComp
 Wire Wire Line
 	2250 2400 2100 2400
 Wire Wire Line
-	2100 2400 2100 2300
+	2100 2300 2100 2500
 Wire Wire Line
-	2250 2500 2100 2500
-Wire Wire Line
-	2100 2500 2100 2400
+	2100 2500 2250 2500
 Connection ~ 2100 2400
 NoConn ~ 2250 3150
 NoConn ~ 2250 3250
@@ -534,12 +514,10 @@ $EndComp
 Wire Wire Line
 	2250 4050 2100 4050
 Wire Wire Line
-	2100 4050 2100 4150
+	2100 4050 2100 4300
 Wire Wire Line
-	2250 4150 2100 4150
+	2100 4150 2250 4150
 Connection ~ 2100 4150
-Wire Wire Line
-	2100 4150 2100 4300
 Connection ~ 5550 3600
 Wire Wire Line
 	5550 3550 5550 3600
@@ -547,8 +525,6 @@ Wire Wire Line
 	5100 3100 5100 3150
 Wire Wire Line
 	5550 3350 5550 2850
-Wire Wire Line
-	4750 3600 4750 2850
 $Comp
 L _passive:C C1
 U 1 1 5AFA49D9
@@ -560,8 +536,6 @@ F 3 "" H 4190 2375 60  0000 C CNN
 	1    4200 2400
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	4800 2400 4300 2400
 Connection ~ 4800 2400
 Wire Wire Line
 	4100 2400 3650 2400
@@ -603,33 +577,63 @@ Wire Wire Line
 	8200 5150 8300 5150
 Wire Wire Line
 	8300 5150 8300 4900
-Text Label 2200 2700 2    60   ~ 0
-DDS_WCLK
-Text Label 2200 2800 2    60   ~ 0
-DDS_FQUD
-Text Label 2200 2900 2    60   ~ 0
-DDS_RESET
-Text Label 2200 3050 2    60   ~ 0
-DDS_DATA
-Wire Wire Line
-	2250 2700 2200 2700
-Wire Wire Line
-	2250 2800 2200 2800
-Wire Wire Line
-	2250 2900 2200 2900
-Wire Wire Line
-	2250 3050 2200 3050
-Wire Wire Line
-	6650 4800 7600 4800
 Connection ~ 6650 4800
-Wire Wire Line
-	6650 3600 7600 3600
 Connection ~ 6650 3600
 Wire Notes Line
 	8850 3250 8850 5600
 Wire Notes Line
 	3850 3250 8850 3250
 Wire Notes Line
-	3850 5600 8850 5600
+	8850 5600 3850 5600
 Connection ~ 4750 3600
+NoConn ~ 2250 2700
+NoConn ~ 2250 2800
+NoConn ~ 2250 2900
+NoConn ~ 2250 3050
+$Comp
+L pcb:TESTPOINT TP3
+U 1 1 5AF825D9
+P 5100 2400
+F 0 "TP3" H 5250 2550 50  0000 C CNN
+F 1 "pcb:TESTPOINT" H 5250 2450 50  0001 C CNN
+F 2 "conn-test:TEST-SMD-SMALL" H 5050 2150 50  0001 C CNN
+F 3 "" H 5250 2550 50  0001 C CNN
+	1    5100 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L pcb:TESTPOINT TP4
+U 1 1 5AF826AA
+P 5350 2700
+F 0 "TP4" H 5500 2850 50  0000 C CNN
+F 1 "pcb:TESTPOINT" H 5500 2750 50  0001 C CNN
+F 2 "conn-test:TEST-SMD-SMALL" H 5300 2450 50  0001 C CNN
+F 3 "" H 5500 2850 50  0001 C CNN
+	1    5350 2700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5350 2850 5350 2700
+$Comp
+L pcb:TESTPOINT TP6
+U 1 1 5AF82AAA
+P 6650 4800
+F 0 "TP6" H 6800 4950 50  0000 C CNN
+F 1 "pcb:TESTPOINT" H 6800 4850 50  0001 C CNN
+F 2 "conn-test:TEST-SMD-SMALL" H 6600 4550 50  0001 C CNN
+F 3 "" H 6800 4950 50  0001 C CNN
+	1    6650 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L pcb:TESTPOINT TP5
+U 1 1 5AF82B07
+P 6650 3600
+F 0 "TP5" H 6800 3750 50  0000 C CNN
+F 1 "pcb:TESTPOINT" H 6800 3650 50  0001 C CNN
+F 2 "conn-test:TEST-SMD-SMALL" H 6600 3350 50  0001 C CNN
+F 3 "" H 6800 3750 50  0001 C CNN
+	1    6650 3600
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
