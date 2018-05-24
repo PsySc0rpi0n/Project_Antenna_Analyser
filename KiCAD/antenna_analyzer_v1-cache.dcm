@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP AtMega328P-PU
+D avr micro controler
+K atmega 328
+$ENDCMP
+#
+#End Doc Library
