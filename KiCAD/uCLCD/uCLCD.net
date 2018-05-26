@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source "/home/narayan/3º Ano - Electrónica e Telecomunicações/Cadeiras_3A_2S/Projecto_Telecomunicações/Project_Antenna_Analyser/KiCAD/uCLCD/uCLCD.sch")
-    (date "Sat 26 May 2018 00:30:52 WEST")
+    (date "Sat 26 May 2018 16:43:07 WEST")
     (tool "Eeschema 4.0.5+dfsg1-4")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -301,14 +301,14 @@
         (pin (num 3) (name Vcc) (type input))
         (pin (num 4) (name GND) (type input)))))
   (libraries
-    (library (logical device)
-      (uri /usr/share/kicad/library/device.lib))
-    (library (logical uCLCD)
-      (uri "/home/narayan/3º Ano - Electrónica e Telecomunicações/Cadeiras_3A_2S/Projecto_Telecomunicações/Project_Antenna_Analyser/KiCAD/uCLCD/uCLCD.lib"))
     (library (logical conn)
       (uri /usr/share/kicad/library/conn.lib))
+    (library (logical device)
+      (uri /usr/share/kicad/library/device.lib))
     (library (logical atmel)
-      (uri /usr/share/kicad/library/atmel.lib)))
+      (uri /usr/share/kicad/library/atmel.lib))
+    (library (logical uCLCD)
+      (uri "/home/narayan/3º Ano - Electrónica e Telecomunicações/Cadeiras_3A_2S/Projecto_Telecomunicações/Project_Antenna_Analyser/KiCAD/uCLCD/uCLCD.lib")))
   (nets
     (net (code 1) (name "Net-(P9-Pad4)")
       (node (ref P9) (pin 4)))
