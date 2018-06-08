@@ -155,16 +155,16 @@
 #define LCD_DATA3_PIN    5            /**< pin for 4bit data bit 3  */
 #endif
 #ifndef LCD_RS_PORT
-#define LCD_RS_PORT      LCD_PORT     /**< port for RS line         */
+#define LCD_RS_PORT      PORTD     /**< port for RS line         */
 #endif
 #ifndef LCD_RS_PIN
-#define LCD_RS_PIN       0            /**< pin  for RS line         */
+#define LCD_RS_PIN       7            /**< pin  for RS line         */
 #endif
 #ifndef LCD_RW_PORT
-#define LCD_RW_PORT      PORTD        /**< port for RW line         */
+#define LCD_RW_PORT      LCD_PORT        /**< port for RW line         */
 #endif
 #ifndef LCD_RW_PIN
-#define LCD_RW_PIN       7            /**< pin  for RW line         */
+#define LCD_RW_PIN       0            /**< pin  for RW line         */
 #endif
 #ifndef LCD_E_PORT
 #define LCD_E_PORT       LCD_PORT     /**< port for Enable line     */

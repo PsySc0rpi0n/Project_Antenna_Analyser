@@ -1,12 +1,13 @@
 #include <avr/io.h>
 #include <inttypes.h>
+#include <util/delay.h>
 
 #include "signal_gen.h"
 
-#define RST_PIN   PC5 // Reset pin      -- AD9850 <----> AtMega328
-#define DATA_PIN  PC4 // Data pin       -- AD9850 <----> AtMega328
-#define FU_UD_PIN PC3 // Freq_up pin    -- AD9850 <----> AtMega328
-#define W_CLK_PIN PC2 // Word Clock pin -- AD9850 <----> AtMega328
+#define RST_PIN   PC2 // Reset pin      -- AD9850 <----> AtMega328
+#define DATA_PIN  PC3 // Data pin       -- AD9850 <----> AtMega328
+#define FU_UD_PIN PC4 // Freq_up pin    -- AD9850 <----> AtMega328
+#define W_CLK_PIN PC5 // Word Clock pin -- AD9850 <----> AtMega328
 
 void pulse_high(uint8_t pin){
    PORTC |= _BV(pin);
@@ -34,6 +35,21 @@ void freq_send(uint64_t frequency){
 
 void ad9850_setup(void){
    // Set AD9850 pins as output
+
+   //Test code
+   PORTC |= _BV(PC5);
+   _delay_ms(250);
+   PORTC &= ~_BV(PC5);
+   _delay_ms(250);
+   PORTC |= _BV(PC5);
+   _delay_ms(250);
+   PORTC &= ~_BV(PC5);
+   _delay_ms(250);
+   PORTC |= _BV(PC5);
+   _delay_ms(250);
+   PORTC &= ~_BV(PC5);
+   _delay_ms(250);
+
    DDRC |= (1 << RST_PIN) | (1 << DATA_PIN) | (1 << FU_UD_PIN) | (1 << W_CLK_PIN);
 
    pulse_high(RST_PIN);

@@ -40,10 +40,13 @@ int main(void){
    uint64_t initial_freq_value = 20e6,
             *current_freq_value  = &initial_freq_value;
 
+
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
    adc_setup();
    ad9850_setup();
+
+
    interrupt_setup();
 
    freq_send(initial_freq_value);
