@@ -44,7 +44,10 @@ int main(void){
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
    adc_setup();
-   ad9850_setup();
+   //Test code
+   //DO NOT FORGET TO ACTIVATE BUSYWAIT FLAG OF LCD
+   //BY UNCOMMENTING LINES 271 AND 274 IN FILE LCD.C
+    ad9850_setup();
 
 
    interrupt_setup();

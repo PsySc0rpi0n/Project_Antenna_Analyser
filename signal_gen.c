@@ -1,6 +1,5 @@
 #include <avr/io.h>
 #include <inttypes.h>
-#include <util/delay.h>
 
 #include "signal_gen.h"
 
@@ -35,21 +34,6 @@ void freq_send(uint64_t frequency){
 
 void ad9850_setup(void){
    // Set AD9850 pins as output
-
-   //Test code
-   PORTC |= _BV(PC5);
-   _delay_ms(250);
-   PORTC &= ~_BV(PC5);
-   _delay_ms(250);
-   PORTC |= _BV(PC5);
-   _delay_ms(250);
-   PORTC &= ~_BV(PC5);
-   _delay_ms(250);
-   PORTC |= _BV(PC5);
-   _delay_ms(250);
-   PORTC &= ~_BV(PC5);
-   _delay_ms(250);
-
    DDRC |= (1 << RST_PIN) | (1 << DATA_PIN) | (1 << FU_UD_PIN) | (1 << W_CLK_PIN);
 
    pulse_high(RST_PIN);

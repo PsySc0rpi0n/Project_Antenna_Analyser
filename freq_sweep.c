@@ -12,14 +12,15 @@
 volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 
 void interrupt_setup(void){
-      // Set interrupts to trigger on falling edges, according to the datasshet, page 71, section 13.2.1
-      //EICRA |= (1 << ISC11) | (1 << ISC01); // for INT1 and INT0
+      //http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf
+      Set interrupts to trigger on rising edges edges, according to the datasshet, page 91, section 17.2.1
+      EICRA |= (1 << ISC11) | (1 << ISC10) | (1 << ISC01) | (1 << ISC00); // for INT1 and INT0
 
-      // Activate INT1 and INT0, ccording to the datasshet, page 72, section 13.2.2
-      //EIMSK |= (1 << INT1) | (1 << INT0);
+      //Activate INT1 and INT0, according to the datasshet, page 72, section 13.2.2
+      EIMSK |= (1 << INT1) | (1 << INT0);
 
-      // Activate global interrupt flag
-      //sei();
+      //Activate global interrupt flag
+      sei();
 }
 
 /*
