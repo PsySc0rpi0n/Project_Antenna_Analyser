@@ -16,20 +16,20 @@ volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 /*
  *Function that sweeps frequency when INT0 or INT1 are triggered
  */
-void freq_sweep(uint64_t* current_freq_val){
+void freq_sweep(uint64_t current_freq_val){
    if(sweep_sta == SWEEP_STA_UP){
-      if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
-         *current_freq_val = FREQ_MIN;
+      if( (current_freq_val + FREQ_STEP) > FREQ_MAX)
+         current_freq_val = FREQ_MIN;
       else
-         *current_freq_val += FREQ_STEP;
+         current_freq_val += FREQ_STEP;
    }else if(sweep_sta == SWEEP_STA_DOWN){
-      if( (*current_freq_val - FREQ_STEP) < FREQ_MIN)
-         *current_freq_val = FREQ_MAX;
+      if( (current_freq_val - FREQ_STEP) < FREQ_MIN)
+         current_freq_val = FREQ_MAX;
       else
-         *current_freq_val -= FREQ_STEP;
+         current_freq_val -= FREQ_STEP;
    }
 
-   freq_send(*current_freq_val);
+   freq_send(current_freq_val);
    sweep_sta = SWEEP_STA_OFF;
 }
 

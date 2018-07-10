@@ -13,10 +13,10 @@
 #define BUFFER 64
 
 void write_to_lcd_from_program_space_string(uint8_t index);
-void print_updated_freq_and_units(uint8_t ret, uint64_t *freq);
+void print_updated_freq_and_units(uint8_t ret, uint64_t freq);
 uint8_t freq_step_down(uint64_t freq_value);
 
-uint64_t* current_freq_value;
+uint64_t current_freq_value;
 
 const char msg_vswr_value[]    PROGMEM = "VSWR:";
 const char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
@@ -40,7 +40,7 @@ int main(void){
    char tmp[BUFFER];
    uint64_t initial_freq_value = 20e6;
 
-   *current_freq_value  = initial_freq_value;
+   current_freq_value  = initial_freq_value;
 
 
    lcd_init(LCD_DISP_ON);
@@ -78,7 +78,7 @@ int main(void){
       lcd_gotoxy(5, 1);
       lcd_puts(tmp);
 
-      print_updated_freq_and_units(freq_step_down(*current_freq_value), current_freq_value);
+      print_updated_freq_and_units(freq_step_down(current_freq_value), current_freq_value);
    }
    return 0;
 }
@@ -104,16 +104,16 @@ uint8_t freq_step_down(uint64_t freq_value){
    return -1;
 }
 
-void print_updated_freq_and_units(uint8_t ret, uint64_t *freq){
+void print_updated_freq_and_units(uint8_t ret, uint64_t freq){
    char tmp[BUFFER];
    switch(ret){
-      case 0:  dtostrf(*freq / 1e3, 5, 1, tmp);
+      case 0:  dtostrf(freq / 1e3, 5, 1, tmp);
                lcd_gotoxy(9, 2);
                lcd_puts(tmp);
                lcd_gotoxy(14, 2);
                write_to_lcd_from_program_space_string(4);
                break;
-      case 1:  dtostrf(*freq / 1e6, 5, 2, tmp);
+      case 1:  dtostrf(freq / 1e6, 5, 2, tmp);
                lcd_gotoxy(9, 2);
                lcd_puts(tmp);
                lcd_gotoxy(14, 2);
