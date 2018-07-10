@@ -16,6 +16,7 @@ void write_to_lcd_from_program_space_string(uint8_t index);
 void print_updated_freq_and_units(uint8_t ret, uint64_t *freq);
 uint8_t freq_step_down(uint64_t freq_value);
 
+uint64_t* current_freq_value;
 
 const char msg_vswr_value[]    PROGMEM = "VSWR:";
 const char msg_vswr_analyser[] PROGMEM = "VSWR annalyser";
@@ -32,25 +33,21 @@ const PGM_P const messages[]   PROGMEM = {
                                           msg_dds_freq_Khz,
                                           msg_dds_freq_Mhz,
                                           msg_unkown_error
-                                       };
+                                          };
 
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t initial_freq_value = 20e6,
-            *current_freq_value  = &initial_freq_value;
+   uint64_t initial_freq_value = 20e6;
+
+   *current_freq_value  = initial_freq_value;
 
 
    lcd_init(LCD_DISP_ON);
    lcd_clrscr();
    adc_setup();
-   //Test code
-   //DO NOT FORGET TO ACTIVATE BUSYWAIT FLAG OF LCD
-   //BY UNCOMMENTING LINES 271 AND 274 IN FILE LCD.C
-    ad9850_setup();
-
-
-   interrupt_setup();
+   ad9850_setup();
+   timer_setup();
 
    freq_send(initial_freq_value);
 
@@ -76,12 +73,6 @@ int main(void){
 
 
    for( ; ;){
-      if(sweep_sta != SWEEP_STA_OFF){
-         freq_sweep(current_freq_value);
-      }
-
-      _delay_ms(1000);
-
       adc_read(&vswr_val);
       dtostrf(vswr_val, 5, 2, tmp);
       lcd_gotoxy(5, 1);
@@ -101,6 +92,9 @@ void write_to_lcd_from_program_space_string(uint8_t index){
    lcd_puts(buffer_str);
 }
 
+/*
+ *
+ */
 uint8_t freq_step_down(uint64_t freq_value){
 
    if(freq_value >= 1 && freq_value <= 9e5)

@@ -9,31 +9,14 @@
 #define FREQ_MIN    100e3
 #define FREQ_STEP   100e3
 
-#define KEY_INPUT    PIND
+#define COUNT 16
 
 volatile uint8_t sweep_sta = SWEEP_STA_OFF;
 
-uint8_t key_state = 0;         // debounced and inverted key state:
-                               // bit = 1: key pressed
-uint8_t key_press = 0;         // key press detect
-
-void interrupt_setup(void){
-      //http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf
-      //Set interrupts to trigger on rising edges edges, according to the datasshet, page 91, section 17.2.1
-      EICRA |= (1 << ISC11) | (1 << ISC10) | (1 << ISC01) | (1 << ISC00); // for INT1 and INT0
-
-      //Activate INT1 and INT0, according to the datasshet, page 72, section 13.2.2
-      EIMSK |= (1 << INT1) | (1 << INT0);
-
-      //Activate global interrupt flag
-      sei();
-}
-
 /*
- *Function that sweeps frequency whan INT0 or INT1 are triggered
+ *Function that sweeps frequency when INT0 or INT1 are triggered
  */
 void freq_sweep(uint64_t* current_freq_val){
-
    if(sweep_sta == SWEEP_STA_UP){
       if( (*current_freq_val + FREQ_STEP) > FREQ_MAX)
          *current_freq_val = FREQ_MIN;
@@ -50,46 +33,45 @@ void freq_sweep(uint64_t* current_freq_val){
    sweep_sta = SWEEP_STA_OFF;
 }
 
-/////////////////////////////////////////////////////////////////////////
-void get_key_press(uint8_t key_mask){
-  cli();
-  key_mask &= key_press;                // read key(s)
-  key_press ^= key_mask;                // clear key(s)
-  sei();
-}
 
-void debouce_button_timer_setup(void){
-  TCCR0A = 1 << CS02;               //divide by 256 * 256
-  TIMSK0 = 1 << TOIE0;              //enable timer interrupt
-  sei();
-}
-/////////////////////////////////////////////////////////////////////////
+ void gpio_setup(void){
+ 	//PORTD = (1 << PD2) | (1 << PD3);
+ 	//DDRB = (1 << PB1);					//set PB1 as output
+ }
 
+ void timer_setup(void){
+ 	TCCR0B = (1 << CS02);
+ 	TIMSK0 = (1 << TOIE0);
+   sei();
+ }
 
-/*
- * ISR routines
+ /*
+ *ISR Routines
  */
-ISR (INT0_vect){
-   get_key_press(0x0b);
-   sweep_sta = SWEEP_STA_UP;
-   //_delay_ms(100); // Button debouncing
-}
+ ISR(TIMER0_OVF_vect){
 
-ISR (INT1_vect){
-   get_key_press(0x08);
-   sweep_sta = SWEEP_STA_DOWN;
-   //_delay_ms(100); // Button debouncing
-}
+ 	static uint8_t counter0 = 0, counter1 = 0;
+ 	uint8_t buttons = PIND;
+ 	uint8_t button0 = !(buttons & (1 << PD2)),
+ 			  button1 = !(buttons & (1 << PD3));
 
-ISR (TIMER0_OVF_vect){
-   static char ct0, ct1;
-   char i;
+ 	if(button0){
+ 		if(counter0 < COUNT){
+ 			counter0++;
+ 			if(counter0 == COUNT){
+ 				sweep_sta = SWEEP_STA_DOWN;
+            freq_sweep(current_freq_value);
+ 			}
+ 		}
+ 	}
 
-   i = key_state ^ ~KEY_INPUT;           // key changed ?
-   ct0 = ~( ct0 & i );                   // reset or count ct0
-   ct1 = ct0 ^ (ct1 & i);                // reset or count ct1
-   i &= ct0 & ct1;                       // count until roll over ?
-   key_state ^= i;                       // then toggle debounced state
-   // now debouncing finished
-   key_press |= key_state & i;           // 0->1: key press detect
-}
+ 	if(button1){
+ 		if(counter1 < COUNT){
+ 			counter1++;
+ 			if(counter1 == COUNT){
+ 				sweep_sta = SWEEP_STA_UP;
+            freq_sweep(current_freq_value);
+ 			}
+ 		}
+ 	}
+ }
