@@ -22,6 +22,7 @@ adc.o        : adc.c adc.h
 project.o    : project.c
 lcd.o        : lcd.c lcd.h
 freq_sweep.o : freq_sweep.c freq_sweep.h
+debounce.o	 : debounce.c debounce.h
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)

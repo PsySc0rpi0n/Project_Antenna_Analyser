@@ -9,7 +9,7 @@
 #define FREQ_MIN    100e3
 #define FREQ_STEP   100e3
 
-volatile uint8_t sweep_sta = SWEEP_STA_OFF;
+uint8_t sweep_sta = SWEEP_STA_OFF;
 
 /*
  *Function that sweeps frequency when TIMER0 overflows and interrupt is triggered
