@@ -9,6 +9,7 @@
 #include "freq_sweep.h"
 #include "adc.h"
 #include "lcd.h"
+#include "debounce.h"
 
 #define BUFFER 64
 
@@ -39,7 +40,7 @@ int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
    uint64_t initial_freq_value = 20e6;
-
+   uint8_t button_pressed;
    current_freq_value  = initial_freq_value;
 
 
@@ -47,7 +48,7 @@ int main(void){
    lcd_clrscr();
    adc_setup();
    ad9850_setup();
-   timer_setup();
+   timer_intr_setup();
 
    freq_send(initial_freq_value);
 
@@ -77,7 +78,12 @@ int main(void){
       dtostrf(vswr_val, 5, 2, tmp);
       lcd_gotoxy(5, 1);
       lcd_puts(tmp);
-
+      button_pressed = get_key_press(0x0c);
+      if( button_pressed & 0x04 )
+         sweep_sta = SWEEP_STA_UP;
+      else if( (button_pressed & 0x08) )
+         sweep_sta = SWEEP_STA_DOWN;
+      freq_sweep();
       print_updated_freq_and_units(freq_step_down(current_freq_value), current_freq_value);
    }
    return 0;
