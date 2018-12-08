@@ -39,7 +39,7 @@ const PGM_P const messages[]   PROGMEM = {
 int main(void){
    float vswr_val = 0;
    char tmp[BUFFER];
-   uint64_t initial_freq_value = 20e6;
+   uint64_t initial_freq_value = 27e6;
    uint8_t button_pressed;
    current_freq_value  = initial_freq_value;
 
@@ -72,19 +72,26 @@ int main(void){
    write_to_lcd_from_program_space_string(3);
    _delay_ms(100);
 
-
+   adc_read(&vswr_val);
+   dtostrf(vswr_val, 5, 2, tmp);
+   lcd_gotoxy(5, 1);
+   lcd_puts(tmp);
+   print_updated_freq_and_units(freq_step_down(current_freq_value), current_freq_value);
    for( ; ;){
-      adc_read(&vswr_val);
-      dtostrf(vswr_val, 5, 2, tmp);
-      lcd_gotoxy(5, 1);
-      lcd_puts(tmp);
       button_pressed = get_key_press(0x0c);
       if( button_pressed & 0x04 )
          sweep_sta = SWEEP_STA_UP;
       else if( (button_pressed & 0x08) )
          sweep_sta = SWEEP_STA_DOWN;
-      freq_sweep();
-      print_updated_freq_and_units(freq_step_down(current_freq_value), current_freq_value);
+      if( sweep_sta != SWEEP_STA_OFF ){
+         freq_sweep();
+         print_updated_freq_and_units(freq_step_down(current_freq_value), current_freq_value);
+         adc_read(&vswr_val);
+         dtostrf(vswr_val, 5, 2, tmp);
+         lcd_gotoxy(5, 1);
+         lcd_puts(tmp);
+         //_delay_ms(1000);
+      }
    }
    return 0;
 }
@@ -113,19 +120,19 @@ uint8_t freq_step_down(uint64_t freq_value){
 void print_updated_freq_and_units(uint8_t ret, uint64_t freq){
    char tmp[BUFFER];
    switch(ret){
-      case 0:  dtostrf(freq / 1e3, 5, 1, tmp);
+      case 0:  dtostrf(freq / 1e3, 5, 1, tmp); //Khz divider
                lcd_gotoxy(9, 2);
                lcd_puts(tmp);
                lcd_gotoxy(14, 2);
                write_to_lcd_from_program_space_string(4);
                break;
-      case 1:  dtostrf(freq / 1e6, 5, 2, tmp);
+      case 1:  dtostrf(freq / 1e6, 5, 2, tmp); //Mhz divider
                lcd_gotoxy(9, 2);
                lcd_puts(tmp);
                lcd_gotoxy(14, 2);
                write_to_lcd_from_program_space_string(5);
                break;
-      default: lcd_clrscr();
+      default: lcd_clrscr();                    //Unnkown Error
                write_to_lcd_from_program_space_string(6);
 
    }
